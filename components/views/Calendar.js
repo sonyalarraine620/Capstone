@@ -5,3 +5,5 @@ export default () => html`
     <p>Monthly Calender</p>
 </section>
 `
+//We need to export our template literals as a functional component.
+//export function as default export ex. export default()=> html `html-literal`;

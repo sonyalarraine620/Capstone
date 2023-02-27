@@ -3,3 +3,5 @@ export { default as Daily } from "./Daily";
 export { default as Home } from "./Home";
 export { default as Calendar } from "./Calendar";
 export { default as Todo } from "./Todo";
+
+//exporting all of the files in the views folder in the index.js file. 

@@ -5,4 +5,4 @@ export default (state) => html`
 ${views[state.view](state)}
 `;
 
-//this needs work/ clarification
+//We are importing all our pages from the views folder

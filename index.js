@@ -63,23 +63,23 @@ router.hooks({
             done();
           });
           break;
-      case "Time":
-            // New Axios get request utilizing already made environment variable
-            axios
-              .get(
-                `http://worldtimeapi.org/api/timezone=${process.env.WORLD_TIME_API}`
-                )
-              .then(response => {
-                console.log(response.data);
-                // Storing retrieved data in state
-                store.Home.time = response.data;
-                done();
-              })
-              .catch((error) => {
-                console.log("It puked", error);
-                done();
-              });
-            break;
+      //  case "Time":
+      //       // New Axios get request utilizing already made environment variable
+      //       axios
+      //         .get(
+      //           `http://worldtimeapi.org/api/timezone=${process.env.WORLD_TIME_API}`
+      //           )
+      //         .then(response => {
+      //           console.log(response.data);
+      //           // Storing retrieved data in state
+      //           store.Home.time = response.data;
+      //           done();
+      //         })
+      //         .catch((error) => {
+      //           console.log("It puked", error);
+      //           done();
+      //         });
+      //       break;
             default:
               done();
     }

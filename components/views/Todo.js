@@ -6,3 +6,4 @@ export default () => html`
     <p> Feeling productive? Let's add to our To Do list</p>
 </section>
 `
+//We need to export our template literals as a functional component.

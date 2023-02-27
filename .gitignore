@@ -6,3 +6,4 @@ node_modules
 .idea
 .parcel-cache
 .vscode
+.env

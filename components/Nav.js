@@ -14,3 +14,5 @@ export default links => html`
     </ul>
 </nav>
 `;
+
+//We need to export our template literals as a functional component.

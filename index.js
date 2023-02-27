@@ -67,7 +67,7 @@ router.hooks({
             // New Axios get request utilizing already made environment variable
             axios
               .get(
-                `http://worldtimeapi.org/api/ip=${process.env.WORLD_TIME_API}`
+                `http://worldtimeapi.org/api/timezone=${process.env.WORLD_TIME_API}`
                 )
               .then(response => {
                 console.log(response.data);

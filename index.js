@@ -4,6 +4,7 @@ import Navigo from "navigo";
 import{ capitalize } from "lodash";
 import axios from "axios";
 import dotenv from "dotenv";
+// import TododoistApi from "@doist/todoist-api-typescript"
 
 dotenv.config();
 
@@ -63,25 +64,45 @@ router.hooks({
             done();
           });
           break;
-      //  case "Time":
-      //       // New Axios get request utilizing already made environment variable
-      //       axios
-      //         .get(
-      //           `http://worldtimeapi.org/api/timezone=${process.env.WORLD_TIME_API}`
+       case "Home":
+            axios
+              .get(
+                `https://www.timeapi.io/api/Time/current/zone?timeZone=Los%20Angeles=${process.env.WORLD_TIME_API}`//API IS BROKEN(i think)/ FIND A NEW ONE
+                )
+              .then(response => {
+                console.log(response.data);
+                // Storing retrieved data in state
+                store.Home.time = {};
+                store.Home.time.la = response.data.name;
+                console.log(store.Home.time);
+                done();
+              })
+              .catch((error) => {
+                console.log("It puked", error);
+                done();
+              });
+         break;
+      // case "Todo":
+      //         axios
+      //           .get(
+      //             // Replace the key provided here with your own key from openweathermap
+      //             `https://api.todoist.com/rest/v2/projects=${process.env.TO_DO_API}`
       //           )
-      //         .then(response => {
-      //           console.log(response.data);
-      //           // Storing retrieved data in state
-      //           store.Home.time = response.data;
-      //           done();
-      //         })
-      //         .catch((error) => {
-      //           console.log("It puked", error);
-      //           done();
-      //         });
-      //       break;
+      //           .then(response => {
+      //             console.log(response.data);
+                
+      
+      //             // Save Data into state
+      //             store.Todo.list = {};
+      //             store.Todo.list = response.data.name;
+      //             console.log(Todo.list);
+      
+      //             done();
+      //           });
+      //         break;
             default:
               done();
+    
     }
   },
   already: params => {

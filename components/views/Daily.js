@@ -3,6 +3,7 @@ import html from "html-literal";
 export default () => html`
 <section id="Daily">
 <h2>Daily Planner</h2>
+<p>"Plans are nothing; Planning is everything." -Dwight D. Eisnenhower</p>
 </section>
 `
 

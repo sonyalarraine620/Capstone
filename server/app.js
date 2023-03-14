@@ -1,12 +1,13 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require('mongoose');
+const Todo = require("./routers/Todos");
 
 dotenv.config();
 
 const PORT = process.env.PORT || 4040;
 
-const app = express();
+const app = express(); //does this need to be moved?
 mongoose.connect(process.env.MONGODB);
 const db = mongoose.connection;
 
@@ -23,7 +24,21 @@ const logging = (request, response, next) => {
     next();
   };
 
+  const cors = (req, res, next) => {
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "X-Requested-With,content-type, Accept,Authorization,Origin"
+    );
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+    );
+    res.setHeader("Access-Control-Allow-Credentials", true);
+    next();
+  };
   
+  app.use(cors);
   app.use(express.json());
   app.use(logging);
   
@@ -46,4 +61,5 @@ app.get("/status", (request, response) => {
     response.json(responseBody);
  });
 
+ app.use("/todos", todos);
 app.listen(4040, () => console.log("Listening on port 4040"));

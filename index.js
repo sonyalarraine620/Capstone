@@ -82,26 +82,6 @@ router.hooks({
                 done();
               });
          break;
-      case "Todo":
-              axios
-                .get( 
-                  // Replace the key provided here with your own key from todo
-                  `https://api.todoist.com/rest/v2/projects=${process.env.TO_DO_API}`
-                )
-                .then(response => {
-                  console.log(response.data);
-                response = projects;
-      
-                  // Save Data into state
-                  
-                  store.Todo.list = response.data.name;
-                  console.log(store.Todo.list);
-      
-                  done();
-                });
-              break;
-            default:
-              done();
     
     }
   },

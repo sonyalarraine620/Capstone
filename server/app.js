@@ -1,9 +1,12 @@
 const express = require("express");
-const app = express();
+const dotenv = require("dotenv");
 const mongoose = require('mongoose');
 
+dotenv.config();
 
 const PORT = process.env.PORT || 4040;
+
+const app = express();
 mongoose.connect(process.env.MONGODB);
 const db = mongoose.connection;
 
@@ -12,6 +15,7 @@ db.once(
   "open",
   console.log.bind(console, "Successfully opened connection to Mongo!")
 );
+
 
 // Request handlers go here
 const logging = (request, response, next) => {

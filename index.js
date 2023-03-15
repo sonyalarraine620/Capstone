@@ -4,11 +4,10 @@ import Navigo from "navigo";
 import{ capitalize } from "lodash";
 import axios from "axios";
 import dotenv from "dotenv";
-import { TodoistApi } from "@doist/todoist-api-typescript";
 
 dotenv.config();
 const router = new Navigo("/");
-// const api = new TodoistApi("c26bfe911ac20fe4fcbc160c7b94cc319c40ae24")
+
 
 function render(state = store.Home) {
     document.querySelector("#root").innerHTML = `
@@ -22,7 +21,7 @@ function render(state = store.Home) {
 }
 
 
-function afterRender(state) {
+function afterRender() {
   // add menu toggle to bars icon in nav bar
   document.querySelector(".fa-bars").addEventListener("click", () => {
     document.querySelector("nav > ul").classList.toggle("hidden--mobile");

@@ -1,7 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require('mongoose');
-const Todo = require("./routers/Todos");
+const toDos = require("./routers/toDos");
 
 dotenv.config();
 
@@ -61,5 +61,5 @@ app.get("/status", (request, response) => {
     response.json(responseBody);
  });
 
- app.use("/todos", todos);
+ app.use("/toDos", toDos);
 app.listen(4040, () => console.log("Listening on port 4040"));

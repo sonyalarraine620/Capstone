@@ -9,13 +9,13 @@ const toDoSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    dateCreated : {
+    dateCreated: {
         type: Date,
         required: true,
         default: Date.now
     }
     })
 
-    const Todo = mongoose.model('Todo', toDoSchema);
+    const toDo = mongoose.model('toDo', toDoSchema);
 
-    module.exports = Todo
+    module.exports = router;

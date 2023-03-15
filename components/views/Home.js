@@ -3,7 +3,7 @@ import html from "html-literal";
 export default (state) => html`
   <section id="jumbotron">
     <h2> Momma Plans </h2>
-    <h4 id="timebox" >The time is ${state.time.la}</h4>
+
     <h4>Weather forecast today is ${state.weather.temp}</h4>
  
 

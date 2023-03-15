@@ -81,6 +81,8 @@ router.hooks({
                 done();
               });
          break;
+         default:
+          done();
     
     }
   },

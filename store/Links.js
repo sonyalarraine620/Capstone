@@ -3,6 +3,7 @@ export default [
     { title: "Daily", text: "Daily" },
     { title: "Calendar", text: "Calendar"},
     { title: "Todo", text: "Todo"},
+    { title: "About", text: "About"},
 ];
 
 

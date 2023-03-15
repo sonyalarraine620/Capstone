@@ -1,12 +1,44 @@
 const express = require("express");
-const app = express();
+const dotenv = require("dotenv");
+const mongoose = require('mongoose');
+const toDos = require("./routers/toDos");
+
+dotenv.config();
+
+const PORT = process.env.PORT || 4040;
+
+const app = express(); //does this need to be moved?
+mongoose.connect(process.env.MONGODB);
+const db = mongoose.connection;
+
+db.on("error", console.error.bind(console, "Connection Error:"));
+db.once(
+  "open",
+  console.log.bind(console, "Successfully opened connection to Mongo!")
+);
+
+
 // Request handlers go here
 const logging = (request, response, next) => {
     console.log(`${request.method} ${request.url} ${Date.now()}`);
     next();
   };
 
+  const cors = (req, res, next) => {
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "X-Requested-With,content-type, Accept,Authorization,Origin"
+    );
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+    );
+    res.setHeader("Access-Control-Allow-Credentials", true);
+    next();
+  };
   
+  app.use(cors);
   app.use(express.json());
   app.use(logging);
   
@@ -29,4 +61,5 @@ app.get("/status", (request, response) => {
     response.json(responseBody);
  });
 
+ app.use("/toDos", toDos);
 app.listen(4040, () => console.log("Listening on port 4040"));

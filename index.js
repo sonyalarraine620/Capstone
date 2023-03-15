@@ -4,11 +4,11 @@ import Navigo from "navigo";
 import{ capitalize } from "lodash";
 import axios from "axios";
 import dotenv from "dotenv";
-import { TodoistApi } from "@doist/todoist-api-typescript";
+
 
 dotenv.config();
 const router = new Navigo("/");
-// const api = new TodoistApi("c26bfe911ac20fe4fcbc160c7b94cc319c40ae24")
+
 
 function render(state = store.Home) {
     document.querySelector("#root").innerHTML = `
@@ -82,24 +82,7 @@ router.hooks({
                 done();
               });
          break;
-      case "Todo":
-              axios
-                .get( 
-                  // Replace the key provided here with your own key from todo
-                  `https://api.todoist.com/rest/v2/projects=${process.env.TO_DO_API}`
-                )
-                .then(response => {
-                  console.log(response.data);
-                response = projects;
-      
-                  // Save Data into state
-                  
-                  store.Todo.list = response.data.name;
-                  console.log(store.Todo.list);
-      
-                  done();
-                });
-              break;
+     
             default:
               done();
     

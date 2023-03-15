@@ -5,6 +5,7 @@ import{ capitalize } from "lodash";
 import axios from "axios";
 import dotenv from "dotenv";
 
+
 dotenv.config();
 const router = new Navigo("/");
 
@@ -21,7 +22,7 @@ function render(state = store.Home) {
 }
 
 
-function afterRender() {
+function afterRender(state) {
   // add menu toggle to bars icon in nav bar
   document.querySelector(".fa-bars").addEventListener("click", () => {
     document.querySelector("nav > ul").classList.toggle("hidden--mobile");
@@ -81,8 +82,9 @@ router.hooks({
                 done();
               });
          break;
-         default:
-          done();
+     
+            default:
+              done();
     
     }
   },

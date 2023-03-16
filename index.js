@@ -6,6 +6,7 @@ import axios from "axios";
 import dotenv from "dotenv";
 
 
+
 dotenv.config();
 const router = new Navigo("/");
 
@@ -27,6 +28,52 @@ function afterRender(state) {
   document.querySelector(".fa-bars").addEventListener("click", () => {
     document.querySelector("nav > ul").classList.toggle("hidden--mobile");
   });
+console.log(state.view);
+
+//event handler for SUBMIT
+  if (state.view === "Todo") {
+    document.querySelector("form").addEventListener("submit", event => {
+      event.preventDefault();
+
+      const inputList = event.target.elements;
+      console.log("Input Element List", inputList);
+
+      const requestData = {
+        title: inputList.title.value,
+        summary: inputList.summary.value,
+        priority: inputList.priority.value,
+      };
+      console.log("request Body", requestData);
+
+      axios
+        .post(`${process.env.TO_DO_API}/todos`, requestData)
+        .then(response => {
+          store.Todo.todos.push(response.data);
+          router.navigate("/todo");//added s
+        })
+        .catch(error => {
+          console.log("It puked", error);
+        });
+
+    });
+  };
+  if (state.view === "Todo") {
+    document.querySelectorAll(".delete-action").forEach(element => {
+      element.addEventListener("click", event => {
+        const id = event.target.dataset.id;
+        const doit = confirm(`Are your sure you want to delete ${id}`);
+        if (doit) {
+          axios
+            .delete(`${process.env.TO_DO_API}/todos/${id}`)
+            .then(response => {
+              console.log("response", response);
+              router.navigate("/todo");
+            });
+        }
+      });
+    });
+  }
+
 }
 
 router.hooks({
@@ -64,6 +111,21 @@ router.hooks({
             done();
           });
           break;
+          case "Todo":
+            // New Axios get request utilizing already made environment variable
+            axios
+              .get(`${process.env.TO_DO_API}/Todos`)
+              .then(response => {
+                // Storing retrieved data in state
+                store.Todo.todos = response.data;
+                console.log(response.data);
+                done();
+              })
+              .catch(error => {
+                console.log("It puked", error);
+                done();
+              });
+            break;
        case "Home":
             axios
               .get(
@@ -82,8 +144,7 @@ router.hooks({
                 done();
               });
          break;
-     
-            default:
+       default:
               done();
     
     }

@@ -13,6 +13,9 @@ const toDoSchema = new mongoose.Schema({
         type: Date,
         required: true,
         default: Date.now
+    },
+    priority: {
+        type: String
     }
     })
 

@@ -27,7 +27,7 @@ router.get('/:id', (request, response) => {
 });
 
 //updating one
-router.patch('/:id', (request, response) => {
+router.put('/:id', (request, response) => {
   const body = request.body;
   toDo.findByIdAndUpdate(
     request.params.id,

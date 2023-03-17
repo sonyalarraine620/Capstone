@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 4040;
 
 const app = express(); //does this need to be moved?
 mongoose.connect(process.env.MONGODB);
+mongoose.connect(process.env.MONGODB2);
 const db = mongoose.connection;
 
 db.on("error", console.error.bind(console, "Connection Error:"));

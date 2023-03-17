@@ -29,7 +29,8 @@ export default (state) => html`
                 <input type="radio" name="priority" id="low" value="low">
             </div>
         </div>
-        <button> Create</button>
+        <button name="create"> Create</button>
+
 
     </form>
     <table id="todos">
@@ -43,12 +44,14 @@ export default (state) => html`
 ${state.todos
     .map(todos => {
         return `<tr><td> ${todos.title}</td><td>${todos.summary}</td><td>
-        ${todos.priority}</td><td><a data-id="${todos._id} class="delete-action" href="#"> Delete</a></td>
+        ${todos.priority}</td><td><a data-id="${
+          todos._id
+        }" class="delete-action" href="#">Delete</a></td>
+        </tr>
         </tr>`;
     })
+    //Add update function & save after update
     .join("")}
     </table>
 </section>
-`//add form, How do I make it so it doesnt leave the URL when submitting form
-//We need to export our template literals as a functional component.
-//export function as default export ex. export default()=> html `html-literal`;
+`

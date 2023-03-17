@@ -9,6 +9,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 const router = new Navigo("/");
+let calendar;
 
 
 function render(state = store.Home) {
@@ -57,6 +58,7 @@ console.log(state.view);
 
     });
   };
+//event handler for DELETE
   if (state.view === "Todo") {
     document.querySelectorAll(".delete-action").forEach(element => {
       element.addEventListener("click", event => {
@@ -72,7 +74,8 @@ console.log(state.view);
         }
       });
     });
-  }
+  };  
+// Add one for Update here
 
 }
 

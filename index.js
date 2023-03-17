@@ -9,7 +9,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 const router = new Navigo("/");
-let calendar;
+// let calendar;
 
 
 function render(state = store.Home) {
@@ -57,9 +57,7 @@ console.log(state.view);
         });
 
     });
-  };
-//event handler for DELETE
-  if (state.view === "Todo") {
+  
     document.querySelectorAll(".delete-action").forEach(element => {
       element.addEventListener("click", event => {
         const id = event.target.dataset.id;
@@ -68,6 +66,8 @@ console.log(state.view);
           axios
             .delete(`${process.env.TO_DO_API}/todos/${id}`)
             .then(response => {
+
+              store.Todo.todos = state.todos.filter(todo => todo._id !== id )
               console.log("response", response);
               router.navigate("/todo");
             });
@@ -114,7 +114,8 @@ router.hooks({
             done();
           });
           break;
-          case "Todo":
+        case "Todo":
+          console.log("getting todos");
             // New Axios get request utilizing already made environment variable
             axios
               .get(`${process.env.TO_DO_API}/Todos`)

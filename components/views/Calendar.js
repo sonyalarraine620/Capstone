@@ -1,9 +1,21 @@
 import html from "html-literal";
 
 export default () => html`
-<section id="Calendar">
-    <p>Monthly Calender</p>
-</section>
+${st.appointments ? `<div class="calendar-container">
+<div id="calendar"></div>
+</div>` : ""
+}
+${st.event ? `div class="appointment-container">
+<h3>${st.event.title}</h3>
+<div>
+<em>Start: </em><span>${st.event.start.toLocaleString()}</span>
+</div>
+<div>
+<em>End: </em><span>${st.event.end.toLocaleString()}</span>
+</div>
+<button id="delete-appointment" data-id="${st.event.id}">Delete Appointment</button>
+</div>` : ""
+}
 `
 //We need to export our template literals as a functional component.
 //export function as default export ex. export default()=> html `html-literal`;

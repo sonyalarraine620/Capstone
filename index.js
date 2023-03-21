@@ -9,7 +9,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 const router = new Navigo("/");
-// let calendar;
+let calendar;
 
 
 function render(state = store.Home) {
@@ -114,7 +114,7 @@ router.hooks({
             done();
           });
           break;
-        case "Todo":
+      case "Todo":
           console.log("getting todos");
             // New Axios get request utilizing already made environment variable
             axios
@@ -130,7 +130,7 @@ router.hooks({
                 done();
               });
             break;
-       case "Home":
+      case "Home":
             axios
               .get(
                 `${process.env.WORLD_TIME_API}`//API IS BROKEN(i think)/ FIND A NEW ONE
@@ -148,6 +148,52 @@ router.hooks({
                 done();
               });
          break;
+      case "calendar":
+            // New Axios get request utilizing already made environment variable
+            axios
+              .get(`${process.env.TO_DO_API}/appointments`)
+              .then(response => {
+                // Storing retrieved data in state
+                const events = response.data.map(event => {
+                  return {
+                    id: event._id,
+                    title: event.customer,
+                    start: new Date(event.start),
+                    end: new Date(event.end),
+
+                  };
+                });
+                store.Appointments.event = null;
+                store.Appointments.appointments = events;
+                console.log(response.data);
+                done();
+              })
+              .catch(error => {
+                console.log("It puked", error);
+                done();
+              });
+            break;
+      case "calendar":
+              // New Axios get request utilizing already made environment variable
+              axios
+                .get(`${process.env.TO_DO_API}/appointments/${id}`)
+                .then(response => {
+                  // Storing retrieved data in state
+                store.Appointments.appointments = null;
+                store.Appointments.event = {
+                  id: response.data._id,
+                  title: response.data.customer,
+                  start: new Date(response.data.start),
+                  end: new Date(response.data.end),
+                };
+                  console.log(response.data);
+                  done();
+                })
+                .catch(error => {
+                  console.log("It puked", error);
+                  done();
+                });
+              break;
        default:
               done();
     

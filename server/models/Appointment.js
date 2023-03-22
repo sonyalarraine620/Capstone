@@ -5,12 +5,16 @@ const appointmentSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    summary: {
+        type: String,
+        required: true,
+    },
     start: {
-        type: Date,
+        type: String,
         required: true,
     },
     end: {
-        type: Date,
+        type: String,
         required: true,
     }
 

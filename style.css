@@ -4,17 +4,53 @@ html {
 
 #header {
     background-color: #F4C3C2;
+    height: 50px;
     display: flex ;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     padding: 25px;
 } 
 
-#navButton {
-    background-color: #F4C3C2;
-    border: solid;
+#momb {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
+}
+
+
+.hidden--mobile.nav-links {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.navButtons {
+    background-color: #F1B5CB;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 30px;
+    height: 40px;
     width: 90px;
+}
+.navButtons:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+#appointments {
+    border: solid;
+    background-color: #D6D9CE;
+}
+
+#nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+
+}
+
+.plan {
+    width: 500px;
+}
+
+.planning {
+    width: 500px;
 }

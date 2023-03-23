@@ -1,7 +1,9 @@
 import html from "html-literal";
 
+
 export default (state) => html`
-<body>
+<body id="calendarBody">
+<div class="calendar">
     <h1> March 2023</h1>
 <table>
     <thead>
@@ -65,8 +67,8 @@ export default (state) => html`
 
     </tbody>
 </table>
-</body>
-
+</div>
+<div class="eventform">
 <form method="POST">
         <div>
             <label> Title </label>
@@ -86,19 +88,21 @@ export default (state) => html`
         </div>
         <button name="create"> Create</button>
 </form>
-<table id="appointments">
+</div>
+<div class="container">
 ${state.appointments
     .map(appointments => {
-        return `<tr><td><b>Title</b></td></tr><tr><td> ${appointments.title}</td></tr><tr><td><b>Summary</b></td></tr><tr><td>${appointments.summary}</td></tr><tr><td><b>Start</b></td></tr><tr><td>
+        return `<table id="eachAppt" class="item"><tr><td><b>Title</b></td></tr><tr><td> ${appointments.title}</td></tr><tr><td><b>Summary</b></td></tr><tr><td>${appointments.summary}</td></tr><tr><td><b>Start</b></td></tr><tr><td>
         ${appointments.start}</td></tr><tr><td><b>End</b></td></tr><tr><td>${appointments.end}</td></tr><td><a data-id="${
           appointments._id
         }" class="delete-action" href="#">Delete</a></td>
         </tr>
-        </tr>`;
+        </tr></table>`;
     })
     //Add update function & save after update
     .join("")}
-    </table>
+</div>
+</body>
 `
 //We need to export our template literals as a functional component.
 //export function as default export ex. export default()=> html `html-literal`;

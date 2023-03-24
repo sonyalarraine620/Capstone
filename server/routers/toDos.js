@@ -1,5 +1,5 @@
 const {Router} = require('express');
-const toDo = require('../models/toDo')
+const toDo = require('../models/toDo');
 const router = Router();
 
 

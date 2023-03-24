@@ -8,11 +8,11 @@ export default (state) => html`
     <form method="POST">
         <div>
             <label> Title </label>
-            <input name="title">
+            <input name="title" placeholder=" Task">
         </div>
         <div>
             <label> Summary </label>
-            <input name="summary">
+            <input name="summary" placeholder="Add a summary">
         </div>
         <div>
             Priority
@@ -29,7 +29,7 @@ export default (state) => html`
                 <input type="radio" name="priority" id="low" value="low">
             </div>
         </div>
-        <button name="create"> Create</button>
+        <button name="create"> Add Task</button>
 
 
     </form>

@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require('mongoose');
 const toDos = require("./routers/toDos");
+const appointments = require("./routers/appointments");
 
 dotenv.config();
 
@@ -9,7 +10,7 @@ const PORT = process.env.PORT || 4040;
 
 const app = express(); //does this need to be moved?
 mongoose.connect(process.env.MONGODB);
-mongoose.connect(process.env.MONGODB2);
+// mongoose.connect(process.env.MONGODB2);
 const db = mongoose.connection;
 
 db.on("error", console.error.bind(console, "Connection Error:"));
@@ -63,4 +64,5 @@ app.get("/status", (request, response) => {
  });
 
  app.use("/toDos", toDos);
+ app.use("/appointments", appointments);
 app.listen(4040, () => console.log("Listening on port 4040"));

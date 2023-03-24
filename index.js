@@ -9,7 +9,6 @@ import dotenv from "dotenv";
 
 dotenv.config();
 const router = new Navigo("/");
-let calendar;
 
 
 function render(state = store.Home) {
@@ -31,7 +30,7 @@ function afterRender(state) {
   });
 console.log(state.view);
 
-//event handler for SUBMIT
+//event handler for to do list create & delete
   if (state.view === "Todo") {
     document.querySelector("form").addEventListener("submit", event => {
       event.preventDefault();
@@ -57,9 +56,7 @@ console.log(state.view);
         });
 
     });
-  };
-//event handler for DELETE
-  if (state.view === "Todo") {
+  // event handlet for
     document.querySelectorAll(".delete-action").forEach(element => {
       element.addEventListener("click", event => {
         const id = event.target.dataset.id;
@@ -68,6 +65,8 @@ console.log(state.view);
           axios
             .delete(`${process.env.TO_DO_API}/todos/${id}`)
             .then(response => {
+
+              store.Todo.todos = state.todos.filter(todo => todo._id !== id )
               console.log("response", response);
               router.navigate("/todo");
             });
@@ -75,7 +74,69 @@ console.log(state.view);
       });
     });
   };  
-// Add one for Update here
+
+//Event handler for calendar create & delete
+if (state.view === "Calendar") {
+  document.querySelector("form").addEventListener("submit", event => {
+    event.preventDefault();
+
+    const inputList = event.target.elements;
+    console.log("Input Element List", inputList);
+
+    const requestData = {
+      title: inputList.title.value,
+      summary: inputList.summary.value,
+      start: inputList.start.value,
+      end: inputList.end.value,
+    };
+    console.log("request Body", requestData);
+
+    axios
+      .post(`${process.env.TO_DO_API}/appointments`, requestData)
+      .then(response => {
+        store.Calendar.appointments.push(response.data);
+        router.navigate("/calendar");
+      })
+      .catch(error => {
+        console.log("It puked", error);
+      });
+
+  });
+// event handlet for
+  document.querySelectorAll(".delete-action").forEach(element => {
+    element.addEventListener("click", event => {
+      const id = event.target.dataset.id;
+      const doit = confirm(`Are your sure you want to delete ${id}`);
+      if (doit) {
+        axios
+          .delete(`${process.env.TO_DO_API}/appointments/${id}`)
+          .then(response => {
+
+            store.Calendar.appointments = state.appointments.filter(appointment => appointment._id !== id )
+            console.log("response", response);
+            router.navigate("/calendar");
+          });
+      }
+    });
+  });
+};  
+// CALENDAR FUNCTION? // THIS NEEDS TO BE DELETED IF IT IS NOT USED
+
+if (state.view === "calendar") {
+
+  //Add functions here for calendar
+
+    axios
+      .post(`${process.env.TO_DO_API}/todos`, requestData)
+      .then(response => {
+        store.Todo.todos.push(response.data);
+        router.navigate("/calendar");
+      })
+      .catch(error => {
+        console.log("It puked", error);
+      });
+
+  };
 
 }
 
@@ -114,7 +175,8 @@ router.hooks({
             done();
           });
           break;
-          case "Todo":
+      case "Todo":
+          console.log("getting todos");
             // New Axios get request utilizing already made environment variable
             axios
               .get(`${process.env.TO_DO_API}/Todos`)
@@ -129,7 +191,23 @@ router.hooks({
                 done();
               });
             break;
-       case "Home":
+      case "Calendar":
+              console.log("getting appointments");
+                // New Axios get request utilizing already made environment variable
+                axios
+                  .get(`${process.env.TO_DO_API}/appointments`)
+                  .then(response => {
+                    // Storing retrieved data in state
+                    store.Calendar.appointments = response.data;
+                    console.log(response.data);
+                    done();
+                  })
+                  .catch(error => {
+                    console.log("It puked", error);
+                    done();
+                  });
+                break;
+  
             axios
               .get(
                 `${process.env.WORLD_TIME_API}`//API IS BROKEN(i think)/ FIND A NEW ONE
@@ -147,6 +225,28 @@ router.hooks({
                 done();
               });
          break;
+
+              // New Axios get request utilizing already made environment variable
+              axios
+                .get(`${process.env.TO_DO_API}/appointments/${id}`)
+                .then(response => {
+                  // Storing retrieved data in state
+                store.Appointments.appointments = null;
+                store.Appointments.event = {
+                  id: response.data._id,
+                  title: response.data.customer,
+                  start: new Date(response.data.start),
+                  end: new Date(response.data.end)
+                }
+                  
+                  console.log(response.data);
+                  done();
+                })
+                .catch(error => {
+                  console.log("It puked", error);
+                  done();
+                });
+              break;
        default:
               done();
     

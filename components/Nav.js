@@ -8,8 +8,8 @@ export default links => html`
   .map(
     link =>
   `
-    <li>
-      <a href="/${link.title}" title="${link.title}" data-navigo>${link.text}</a></li>`
+    <button class="navButtons">
+      <a href="/${link.title}" title="${link.title}" data-navigo>${link.text}</a></button>`
   )
   .join("")}
     </ul>

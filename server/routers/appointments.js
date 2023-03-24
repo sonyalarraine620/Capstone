@@ -1,19 +1,35 @@
 const { Router } = require("express");
-const appointment = require("../models/appointments");
-
+const Appointment = require("../models/Appointment");
 const router = Router();
 
 router.post("/", (request, response) => {
-    const appointments = new appointment(request.body);
+    const appointment = new Appointment(request.body);
     appointment.save((error, record) => {
-        if (error) return response.sendStatus(500).json(error);
+        if (error) return response.status(500).json(error);
         return response.json(record);
     });
 });
 
 router.get("/", (request, response) => {
-    appointment.find({}, (error, record) => {
-        if (error) return response.sendStatus(500).json(error);
+    Appointment.find({}, (error, record) => {
+      if (error) return response.status(500).json(error);
+      return response.json(record);
+    });
+  });
+
+router.get("/:id", (request, response) => {
+    Appointment.findById(request.params.id, (error, record) => {
+        if (error) return response.status(500).json(error);
         return response.json(record);
     });
 });
+
+router.delete('/:id', (request, response) => {
+    Appointment.findByIdAndRemove(request.params.id, {}, (error, record) => {
+      if (error) return response.status(500).json(error);
+      return response.json(record);
+    });
+    });
+
+
+module.exports = router;

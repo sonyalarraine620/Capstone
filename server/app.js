@@ -1,14 +1,14 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require('mongoose');
-const toDos = require("./routers/toDos");
+const toDo = require("./routers/toDo");
 const appointments = require("./routers/appointments");
 
 dotenv.config();
 
 const PORT = process.env.PORT || 4040;
 
-const app = express(); //does this need to be moved?
+ //does this need to be moved?
 mongoose.connect(process.env.MONGODB);
 // mongoose.connect(process.env.MONGODB2);
 const db = mongoose.connection;
@@ -19,7 +19,7 @@ db.once(
   console.log.bind(console, "Successfully opened connection to Mongo!")
 );
 
-
+const app = express();
 // Request handlers go here
 const logging = (request, response, next) => {
     console.log(`${request.method} ${request.url} ${Date.now()}`);
@@ -63,6 +63,6 @@ app.get("/status", (request, response) => {
     response.json(responseBody);
  });
 
- app.use("/toDos", toDos);
+ app.use("/toDo", toDo);
  app.use("/appointments", appointments);
-app.listen(4040, () => console.log("Listening on port 4040"));
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));

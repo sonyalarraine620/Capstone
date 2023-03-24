@@ -1,8 +1,8 @@
 html {
     background-color: #F3DAD8;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family:'Cormorant Garamond', serif;
     font-size: larger;
-    color: gray;
+    
 }
 
 #header {
@@ -12,6 +12,7 @@ html {
     flex-direction: column;
     justify-content: center;
     padding: 25px;
+    color: rgb(122, 105, 105);
 } 
 
 #momb {
@@ -32,7 +33,14 @@ html {
     border-radius: 30px;
     height: 40px;
     width: 90px;
+    border: none;
+    box-shadow: -10px 8px 0px #E88EED;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: large;
+    font-weight: 600;
 }
+
+
 .navButtons:hover{
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
@@ -55,42 +63,57 @@ html {
 }
 
 #eachAppt {
-    border: 1px solid;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     padding: 10px;
-    height: 220px;
-    width: 220px;
 
 }
+#eachAppt.item {
+    text-align: center;
+}
+
 .container {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-evenly;
+
 }
 
+.container2{
+    display:flex;
+    flex-direction: column;
+}
 .calendar {
     display: flex;
     justify-content: space-evenly;
 }
+.calendardiv {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+    padding: 30px;
+    border: 30px;
+    margin-top: 30px;;
+}
 
 .eventform {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
+    align-self: center;
 }
+
+
 
 .homecontainer {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     border-radius: 5;
 
 }
 
 .fontcontainer {
-    font-size:larger;
-    color: grey;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size:x-large;
+    color: rgb(122, 105, 105);
     padding-top: 50;
     padding-left: 20;
     padding-right: 20;
@@ -103,3 +126,9 @@ html {
     padding-right: 20;
     padding-bottom: 50;
 }
+
+#spring {
+    height: 400px;
+    width: 400px;
+}
+

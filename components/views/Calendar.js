@@ -1,10 +1,13 @@
 import html from "html-literal";
+import spring from "../../assets/spring.jpg";
 
 
 export default (state) => html`
-<body id="calendarBody">
-<div class="calendar">
+
+<div class="calendardiv">
+<img id="spring" src="${spring}">
     <h1> March 2023</h1>
+   
 <table>
     <thead>
     <tr>
@@ -68,41 +71,41 @@ export default (state) => html`
     </tbody>
 </table>
 </div>
-<div class="eventform">
-<form method="POST">
-        <div>
-            <label> Title </label>
-            <input name="title">
-        </div>
-        <div>
-            <label> Summary </label>
-            <input name="summary">
-        </div>
-        <div> 
-            <label> Start </label>
-            <input name="start">
-        </div>
-        <div> 
-            <label> End </label>
-            <input name="end">
-        </div>
-        <button name="create"> Create</button>
-</form>
-</div>
+    <div class="eventform">
+    <form method="POST">
+            <div>
+                <label> Title </label>
+                <input name="title">
+            </div>
+            <div>
+                <label> Summary </label>
+                <input name="summary">
+            </div>
+            <div> 
+                <label> Start </label>
+                <input name="start">
+            </div>
+            <div> 
+                <label> End </label>
+                <input name="end">
+            </div>
+            <button name="create"> Create</button>
+    </form>
+    </div>
 <div class="container">
 ${state.appointments
     .map(appointments => {
-        return `<table id="eachAppt" class="item"><tr><td><b>Title</b></td></tr><tr><td> ${appointments.title}</td></tr><tr><td><b>Summary</b></td></tr><tr><td>${appointments.summary}</td></tr><tr><td><b>Start</b></td></tr><tr><td>
-        ${appointments.start}</td></tr><tr><td><b>End</b></td></tr><tr><td>${appointments.end}</td></tr><td><a data-id="${
+        return `<div class="container2"><div><b> Title</b></div><div> ${appointments.title}</div><div><b>Summary</b></div><div>${appointments.summary}</div><div><b>Start</b></div><div>
+        ${appointments.start}</div><div><b>End</b></div><div>${appointments.end}</div><div><a data-id="${
           appointments._id
-        }" class="delete-action" href="#">Delete</a></td>
-        </tr>
-        </tr></table>`;
+        }" class="delete-action" href="#">Delete</a></div></div>
+        `;
     })
     //Add update function & save after update
     .join("")}
 </div>
-</body>
+
+
 `
 //We need to export our template literals as a functional component.
 //export function as default export ex. export default()=> html `html-literal`;

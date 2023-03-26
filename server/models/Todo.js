@@ -16,8 +16,7 @@ const toDoSchema = new mongoose.Schema({
     },
     priority: {
         type: String
-    }
-    })
+    }});
 
     const toDo = mongoose.model("toDo", toDoSchema);
     //user Id implementation/pin

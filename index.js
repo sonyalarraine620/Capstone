@@ -207,24 +207,6 @@ router.hooks({
                     done();
                   });
                 break;
-  
-            axios
-              .get(
-                `${process.env.WORLD_TIME_API}`//API IS BROKEN(i think)/ FIND A NEW ONE
-                )
-              .then(response => {
-                console.log(response.data);
-                // Storing retrieved data in state
-                store.Home.time = {};
-                store.Home.time.la = response.data.name;
-                console.log(store.Home.time);
-                done();
-              })
-              .catch((error) => {
-                console.log("It puked", error);
-                done();
-              });
-         break;
 
               // New Axios get request utilizing already made environment variable
               axios

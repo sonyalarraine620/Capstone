@@ -19,7 +19,7 @@ const toDoSchema = new mongoose.Schema({
     }
     })
 
-    const toDo = mongoose.model('toDo', toDoSchema);
+    const toDo = mongoose.model("toDo", toDoSchema);
     //user Id implementation/pin
 
     module.exports = toDo;

@@ -49,7 +49,7 @@ console.log(state.view);
         .post(`${process.env.TO_DO_API}/todos`, requestData)
         .then(response => {
           store.Todo.todos.push(response.data);
-          router.navigate("/todo");//added s
+          router.navigate("/todos");//added s
         })
         .catch(error => {
           console.log("It puked", error);
@@ -179,7 +179,7 @@ router.hooks({
           console.log("getting todos");
             // New Axios get request utilizing already made environment variable
             axios
-              .get(`${process.env.TO_DO_API}/Todos`)
+              .get(`${process.env.TO_DO_API}/Todo`)
               .then(response => {
                 // Storing retrieved data in state
                 store.Todo.todos = response.data;
@@ -187,7 +187,7 @@ router.hooks({
                 done();
               })
               .catch(error => {
-                console.log("It puked", error);
+                console.log("It puked ", error);
                 done();
               });
             break;
